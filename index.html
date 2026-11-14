@@ -116,6 +116,50 @@ details[open] summary::after{content:'–'}
 .rev .l{font-size:12px;color:var(--muted);letter-spacing:.04em}
 .note{margin-top:32px;font-size:13px;color:var(--muted);max-width:560px}
 .sent{font-size:13px;color:var(--accent);margin-top:14px}
+/* PDF report (fixed light palette) */
+.rp-host{position:fixed;left:-12000px;top:0;width:794px;pointer-events:none}
+.rp-page{width:794px;height:1123px;background:#FBF8F2;color:#14213D;font-family:var(--sans);display:flex;flex-direction:column;padding:44px 60px 34px;overflow:hidden}
+.rp-top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:16px;border-bottom:1px solid #E3DBCC;margin-bottom:26px}
+.rp-brand{font-family:var(--serif);letter-spacing:.32em;font-size:14px;font-weight:500}
+.rp-brand small{font-family:var(--sans);letter-spacing:.04em;font-size:11px;color:#6E6C72;margin-left:10px}
+.rp-meta{font-size:11px;color:#6E6C72;letter-spacing:.02em}
+.rp-body{flex:1;overflow:hidden}
+.rp-foot{display:flex;justify-content:space-between;font-size:10px;color:#6E6C72;padding-top:12px;border-top:1px solid #E3DBCC}
+.rp-foot span:first-child{font-family:var(--serif);font-style:italic;font-size:12px}
+.rp-over{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6E6C72;font-weight:600}
+.rp-lvl{font-family:var(--serif);font-weight:300;font-size:104px;line-height:.95;letter-spacing:-.03em;margin:6px 0 8px}
+.rp-desc{font-size:14px;color:#55545C;max-width:520px;line-height:1.5}
+.rp-scale{position:relative;margin:30px 0 4px}
+.rp-scale .tr{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid #D9D0BF}
+.rp-scale .tr span{font-size:10px;color:#6E6C72;padding-top:7px;text-align:center;border-left:1px solid #D9D0BF;height:22px}
+.rp-scale .tr span:first-child{border-left:0}
+.rp-pin{position:absolute;top:-5px;width:10px;height:10px;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 3px #FBF8F2}
+.rp-legend{display:flex;gap:18px;font-size:11px;color:#6E6C72}
+.rp-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.rp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.rp-stat{border:1px solid #E3DBCC;border-radius:12px;padding:14px 16px;background:#FFFDF9}
+.rp-stat .v{font-family:var(--serif);font-size:30px;line-height:1.1;margin:5px 0 3px}
+.rp-stat .s{font-size:11px;color:#6E6C72}
+.rp-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;font-size:12px}
+.rp-info div{padding:10px 16px;border-radius:10px;background:#F1EBDF}
+.rp-info b{display:block;font-family:var(--serif);font-size:18px;font-weight:400;margin-top:2px}
+.rp-self{margin-top:10px;font-size:12px;color:#55545C;padding:10px 16px;border-radius:10px;background:#F1EBDF}
+.rp-h{font-family:var(--serif);font-size:20px;font-weight:400;margin:26px 0 12px}
+.rp-row{display:grid;grid-template-columns:190px 1fr 54px;gap:14px;align-items:center;font-size:12px;padding:5px 0}
+.rp-row .tk{height:6px;border-radius:3px;background:#E9E2D4;overflow:hidden}
+.rp-row .tk i{display:block;height:100%;background:#0F6E68;border-radius:3px}
+.rp-row b{text-align:right;font-weight:500;color:#55545C}
+.rp-chips{display:flex;flex-wrap:wrap;gap:6px}
+.rp-chip{font-size:11px;padding:5px 10px;border-radius:999px;background:#F4E4DA;color:#A6532B}
+.rp-chip b{margin-right:5px}
+.rp-note{font-size:11px;color:#6E6C72;margin-top:6px}
+.rp-it{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:10px 0;border-top:1px dashed #E3DBCC}
+.rp-it .mk{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;margin-top:2px}
+.rp-it .mk.ok{background:#E4EEEA;color:#0F6E68} .rp-it .mk.no{background:#F4E4DA;color:#A6532B}
+.rp-it .l{font-size:10px;color:#6E6C72;letter-spacing:.03em}
+.rp-it .p{font-family:var(--serif);font-size:15px;line-height:1.4;margin:2px 0}
+.rp-it .g{color:#0F6E68;font-style:italic;border-bottom:1.5px solid #0F6E68}
+.rp-it .a{font-size:12px;color:#55545C} .rp-it .a s{color:#A6532B}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -733,7 +777,7 @@ function reset(){
     screen:'intro', name:'', self:null,
     vc:{order: shuffle(BANDS.flatMap(b=>b.words).concat(FAKES)), page:0, known:new Set(), result:null},
     scales:{G:{key:'G',resp:[],prior:{m:0,s:1.2},theta:0,se:1.2}, V:{key:'V',resp:[],prior:{m:0,s:1.2},theta:0,se:1.2}},
-    used:new Set(), turn:'G', cur:null, sel:null, typed:'', sent:false
+    used:new Set(), order:[], turn:'G', cur:null, sel:null, typed:'', sent:false
   };
 }
 const VC_PER_PAGE = 14;
@@ -908,13 +952,13 @@ function startTest(){
 }
 function next(){
   const gDone = scaleDone(S.scales.G), vDone = scaleDone(S.scales.V);
-  if (gDone && vDone){ S.screen = 'results'; vResults(); return; }
+  if (gDone && vDone){ S.screen = 'results'; S.finishedAt = Date.now(); vResults(); return; }
   let key = S.turn;
   if (scaleDone(S.scales[key])) key = key === 'G' ? 'V' : 'G';
   const it = pickItem(key);
   if (!it){ S.scales[key].exhausted = true; return next(); }
   S.turn = key === 'G' ? 'V' : 'G';
-  S.used.add(it.id);
+  S.used.add(it.id); S.order.push(it.id);
   S.cur = {it, opts: it.type === 'VT' ? null : shuffle([it.correct, ...it.distractors])};
   S.sel = null; S.typed = '';
   vQuestion();
@@ -944,13 +988,123 @@ function summaryText(R){
   ];
   return lines.filter(Boolean).join('\n');
 }
-function sendToBilly(R){
+const VTYPE_RU = {context:'Слово в контексте', collocations:'Коллокации', phrasal:'Фразовые глаголы', formation:'Словообразование', meaning:'Значение и синонимы', confusing:'Похожие слова', idioms:'Идиомы'};
+const LIBS = {
+  html2canvas: 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  jspdf: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
+};
+function loadScript(src){
+  return new Promise((res, rej)=>{ const sc = document.createElement('script'); sc.src = src; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
+}
+async function ensureLibs(){
+  if (!window.html2canvas) await loadScript(LIBS.html2canvas);
+  if (!(window.jspdf && window.jspdf.jsPDF)) await loadScript(LIBS.jspdf);
+}
+function bars(rows){
+  return rows.map(r=>`<div class="rp-row"><span>${esc(r.label)}</span><div class="tk"><i style="width:${r.t ? Math.round(r.c/r.t*100) : 0}%"></i></div><b>${r.c} / ${r.t}</b></div>`).join('');
+}
+function reportBlocks(R){
+  const all = [...S.scales.G.resp, ...S.scales.V.resp];
+  const gRows = LEVELS.map(l=>{ const rs = S.scales.G.resp.filter(r=>ITEMS[r.id].level===l); return {label:'Уровень ' + l, c: rs.filter(r=>r.ok).length, t: rs.length}; }).filter(r=>r.t);
+  const vRows = Object.keys(VTYPE_RU).map(k=>{ const rs = S.scales.V.resp.filter(r=>ITEMS[r.id].vtype===k); return {label: VTYPE_RU[k], c: rs.filter(r=>r.ok).length, t: rs.length}; }).filter(r=>r.t);
+  const mins = S.startedAt && S.finishedAt ? Math.max(1, Math.round((S.finishedAt - S.startedAt)/60000)) : null;
+  const range = rg => rg[0]===rg[1] ? rg[0] : rg[0] + ' – ' + rg[1];
+  const sizeV = R.size ? (R.size.size < 500 ? '< 500' : '≈ ' + R.size.size.toLocaleString('ru-RU')) : '—';
+  const blocks = [];
+  blocks.push(`<div class="rp-over">Отчёт о результатах${S.name ? ' · ' + esc(S.name) : ''}</div>
+    <div class="rp-lvl">${R.overall.label}</div>
+    <p class="rp-desc">${LEVEL_DESC[R.overall.code]}</p>
+    <div class="rp-scale"><div class="tr">${LEVELS.map(l=>`<span>${l}</span>`).join('')}</div>
+      <div class="rp-pin" style="left:${pos(R.gTheta)}%;background:#14213D"></div>
+      <div class="rp-pin" style="left:${pos(R.vTheta)}%;background:#0F6E68${Math.abs(pos(R.gTheta)-pos(R.vTheta))<2?';top:-16px':''}"></div></div>
+    <div class="rp-legend"><span><i style="background:#14213D"></i>Грамматика</span><span><i style="background:#0F6E68"></i>Лексика</span></div>
+    <div class="rp-stats">
+      <div class="rp-stat"><div class="rp-over">Грамматика</div><div class="v">${R.g.label}</div><div class="s">диапазон ${range(R.gRange)}</div></div>
+      <div class="rp-stat"><div class="rp-over">Лексика</div><div class="v">${R.v.label}</div><div class="s">диапазон ${range(R.vRange)}</div></div>
+      <div class="rp-stat"><div class="rp-over">Словарный запас</div><div class="v">${sizeV}</div><div class="s">${R.size && !R.size.reliable ? 'ненадёжно: отмечено ' + Math.round(R.size.falseRate*100) + '% выдуманных слов' : 'слов, оценка по частотности'}</div></div>
+    </div>
+    <div class="rp-info">
+      <div>Вопросов<b>${R.answered}</b></div>
+      <div>Верных ответов<b>${R.correct} · ${Math.round(R.correct/Math.max(1,R.answered)*100)}%</b></div>
+      <div>Время<b>${mins ? mins + ' мин' : '—'}</b></div>
+    </div>
+    ${S.self !== null ? `<div class="rp-self">Самооценка ученика: «${esc(SELF[S.self][0])}»</div>` : ''}`);
+  blocks.push(`<div class="rp-h">Грамматика по уровням</div>${bars(gRows)}`);
+  blocks.push(`<div class="rp-h">Лексика по типам заданий</div>${bars(vRows)}`);
+  if (R.topics.length) blocks.push(`<div class="rp-h">Что стоит повторить</div><div class="rp-chips">${R.topics.map(t=>`<span class="rp-chip"><b>${t.level}</b>${esc(t.topic)}</span>`).join('')}</div>
+    <p class="rp-note">Темы, в которых были ошибки на уровне ученика или ниже.</p>`);
+  blocks.push(`<div class="rp-h">Разбор ответов</div>`);
+  all.slice().sort((a,b)=>S.order.indexOf(a.id)-S.order.indexOf(b.id)).forEach((r,i)=>{
+    const it = ITEMS[r.id];
+    const right = it.type === 'VT' ? it.answers[0] : it.correct;
+    let prompt = esc(it.prompt).replace('___', '<span class="g">' + esc(right) + '</span>');
+    blocks.push(`<div class="rp-it"><div class="mk ${r.ok?'ok':'no'}">${r.ok?'✓':'✗'}</div><div>
+      <div class="l">${i+1} · ${it.scale==='G'?'Грамматика':'Лексика'} · ${it.level} · ${esc(it.topic)}</div>
+      <div class="p">${prompt}</div>
+      ${r.ok ? '' : `<div class="a">Ответ ученика: <s>${esc(r.dk ? 'не знаю' : (r.given || '—'))}</s></div>`}
+    </div></div>`);
+  });
+  return blocks;
+}
+function buildReport(R, host){
+  const date = new Date(S.finishedAt || Date.now()).toLocaleString('ru-RU', {day:'numeric', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit'});
+  const pages = [];
+  const newPage = () => {
+    const p = document.createElement('div'); p.className = 'rp-page';
+    p.innerHTML = `<div class="rp-top"><span class="rp-brand">NOEON<small>Level Test</small></span><span class="rp-meta">${esc(date)}</span></div><div class="rp-body"></div><div class="rp-foot"><span>Beyond Knowing</span><span class="pn"></span></div>`;
+    host.appendChild(p); pages.push(p); return p.querySelector('.rp-body');
+  };
+  let body = newPage();
+  for (const html of reportBlocks(R)){
+    const wrap = document.createElement('div'); wrap.innerHTML = html;
+    body.appendChild(wrap);
+    if (body.scrollHeight > body.clientHeight + 1 && body.children.length > 1){
+      body.removeChild(wrap); body = newPage(); body.appendChild(wrap);
+    }
+  }
+  pages.forEach((p,i)=>{ p.querySelector('.pn').textContent = (i+1) + ' / ' + pages.length; });
+  return pages;
+}
+async function makePdf(R){
+  await ensureLibs();
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  const host = document.createElement('div'); host.className = 'rp-host'; document.body.appendChild(host);
+  try {
+    const pages = buildReport(R, host);
+    const pdf = new window.jspdf.jsPDF({unit:'pt', format:'a4', compress:true});
+    for (let i=0;i<pages.length;i++){
+      const canvas = await window.html2canvas(pages[i], {scale:2, backgroundColor:'#FBF8F2', logging:false, useCORS:true});
+      if (i) pdf.addPage();
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.88), 'JPEG', 0, 0, 595.28, 841.89);
+    }
+    return pdf.output('blob');
+  } finally { host.remove(); }
+}
+function reportFileName(){
+  const d = new Date(S.finishedAt || Date.now()).toISOString().slice(0,10);
+  const n = (S.name || 'student').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0,40) || 'student';
+  return `NOEON-Level-Test_${n}_${d}.pdf`;
+}
+function setSent(t){ const el = document.getElementById('sent'); if (el) el.textContent = t; }
+async function sendToBilly(R){
   if (S.sent || !CONFIG.telegramToken || !CONFIG.telegramChatId) return;
   S.sent = true;
-  const body = new URLSearchParams({chat_id: CONFIG.telegramChatId, text: summaryText(R)});
-  fetch('https://api.telegram.org/bot' + CONFIG.telegramToken + '/sendMessage', {method:'POST', mode:'no-cors', body})
-    .then(()=>{ const el = document.getElementById('sent'); if (el) el.textContent = 'Результат отправлен преподавателю.'; })
-    .catch(()=>{});
+  const api = 'https://api.telegram.org/bot' + CONFIG.telegramToken;
+  setSent('Отправляем отчёт преподавателю…');
+  try {
+    const blob = await makePdf(R);
+    const fd = new FormData();
+    fd.append('chat_id', CONFIG.telegramChatId);
+    fd.append('caption', summaryText(R).slice(0, 1000));
+    fd.append('document', blob, reportFileName());
+    await fetch(api + '/sendDocument', {method:'POST', mode:'no-cors', body: fd});
+    setSent('Отчёт отправлен преподавателю.');
+  } catch (e) {
+    try {
+      await fetch(api + '/sendMessage', {method:'POST', mode:'no-cors', body: new URLSearchParams({chat_id: CONFIG.telegramChatId, text: summaryText(R)})});
+      setSent('Результат отправлен преподавателю.');
+    } catch (_) { setSent(''); }
+  }
 }
 function copyText(text, btn){
   const done = () => { btn.textContent = 'Скопировано'; setTimeout(()=>{ btn.textContent = 'Скопировать результат'; }, 1800); };
@@ -968,7 +1122,7 @@ function copyText(text, btn){
 view.addEventListener('click', e=>{
   const t = e.target.closest('[data-act]'); if (!t || t.disabled) return;
   const act = t.dataset.act;
-  if (act === 'start'){ const n = document.getElementById('name'); S.name = n ? n.value.trim() : ''; S.screen = 'self'; vSelf(); }
+  if (act === 'start'){ const n = document.getElementById('name'); S.name = n ? n.value.trim() : ''; S.startedAt = Date.now(); S.screen = 'self'; vSelf(); }
   else if (act === 'self'){ S.self = +t.dataset.i; view.querySelectorAll('.card').forEach((c,i)=>c.classList.toggle('on', i===S.self)); view.querySelector('[data-act="self-next"]').disabled = false; }
   else if (act === 'self-next'){ S.screen = 'vocab'; vVocab(); }
   else if (act === 'word'){ const w = t.dataset.w; S.vc.known.has(w) ? S.vc.known.delete(w) : S.vc.known.add(w); t.classList.toggle('on'); t.setAttribute('aria-pressed', S.vc.known.has(w)); }
@@ -1000,7 +1154,7 @@ document.addEventListener('keydown', e=>{
 });
 
 reset(); vIntro();
-window.__LT = {get S(){return S}, ITEMS, estimate, levelOf, vocabSize, sizeToTheta, CONFIG};
+window.__LT = {get S(){return S}, ITEMS, estimate, levelOf, vocabSize, sizeToTheta, CONFIG, makePdf};
 </script>
 </body>
 </html>
