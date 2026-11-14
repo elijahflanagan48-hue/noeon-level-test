@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOEON · Level Test</title>
+<meta name="description" content="Адаптивный тест уровня английского: грамматика и лексика, A1–C2.">
+<meta property="og:title" content="NOEON · Level Test">
+<meta property="og:description" content="Адаптивный тест уровня английского: грамматика и лексика, A1–C2.">
+<meta name="theme-color" content="#F5F0E6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E131C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213D'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' text-anchor='middle' fill='%23F5F0E6'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F0E6; --paper:#FBF8F2; --ink:#14213D; --muted:#6E6C72; --line:#E3DBCC;
+  --accent:#0F6E68; --accent-ink:#FBF8F2; --soft:#E4EEEA; --warn:#A6532B; --warn-soft:#F4E4DA;
+  --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0E131C; --paper:#151B26; --ink:#ECE5D8; --muted:#939AA6; --line:#283142;
+    --accent:#5CC2B4; --accent-ink:#0E131C; --soft:#16302E; --warn:#E39A74; --warn-soft:#3A2419;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.app{max-width:760px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:28px 24px calc(28px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:48px}
+.brand{font-family:var(--serif);font-weight:500;letter-spacing:.32em;font-size:15px}
+.brand small{font-family:var(--sans);letter-spacing:.04em;font-size:12px;color:var(--muted);margin-left:12px;font-weight:500}
+.step{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+main{flex:1;display:flex;flex-direction:column}
+.foot{margin-top:56px;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:13px;text-align:center;font-weight:300}
+.screen{animation:in .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,7vw,56px);line-height:1.08;letter-spacing:-.015em;margin-bottom:20px}
+h1 em{font-style:italic;color:var(--accent)}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,5vw,34px);line-height:1.15;margin-bottom:10px;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:17px;max-width:540px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin:28px 0 36px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+.field{display:block;width:100%;max-width:360px;padding:14px 16px;border:1px solid var(--line);background:var(--paper);border-radius:12px;outline:none;transition:border-color .2s}
+.field:focus{border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:500;transition:transform .15s, opacity .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.28;cursor:default;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn .arr{font-family:var(--serif);font-size:18px;line-height:1}
+.link{color:var(--muted);font-size:14px;padding:10px 4px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.link:hover{color:var(--ink)}
+.cards{display:grid;gap:10px;margin:28px 0 8px}
+.card{text-align:left;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--paper);transition:border-color .2s, background .2s;display:flex;gap:16px;align-items:baseline}
+.card:hover{border-color:var(--muted)}
+.card.on{border-color:var(--accent);background:var(--soft)}
+.card .n{font-family:var(--serif);color:var(--muted);font-size:14px;min-width:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 12px}
+.chip{padding:11px 18px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-family:var(--serif);font-size:18px;transition:all .18s}
+.chip:hover{border-color:var(--muted)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.hint{font-size:14px;color:var(--muted)}
+.bar{height:2px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:40px}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .5s ease}
+.tag{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px}
+.q{font-family:var(--serif);font-size:clamp(24px,4.6vw,32px);line-height:1.35;font-weight:400;margin-bottom:32px;letter-spacing:-.005em}
+.gap{display:inline-block;min-width:3.2em;border-bottom:2px solid var(--muted);margin:0 .12em;text-align:center;color:var(--accent);font-style:italic;line-height:1.1}
+.gap.filled{border-color:var(--accent)}
+.kw{display:inline-block;font-family:var(--sans);font-size:13px;letter-spacing:.08em;padding:4px 10px;border-radius:6px;background:var(--soft);color:var(--accent);font-weight:600;vertical-align:middle;margin-left:8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts.one{grid-template-columns:1fr}
+.opt{text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font-size:17px;display:flex;gap:14px;align-items:baseline;transition:border-color .15s, background .15s}
+.opt:hover{border-color:var(--muted)}
+.opt.on{border-color:var(--accent);background:var(--soft)}
+.opt .k{font-size:12px;color:var(--muted);font-weight:500;min-width:10px}
+.typed{width:100%;max-width:none;font-size:20px;font-family:var(--serif)}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}.app{padding:20px 18px}.top{margin-bottom:32px}}
+/* results */
+.lvl{font-family:var(--serif);font-weight:300;font-size:clamp(96px,22vw,150px);line-height:.9;letter-spacing:-.03em;margin:6px 0 14px}
+.over{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.desc{font-size:17px;max-width:520px;color:var(--muted)}
+.scale{margin:52px 0 6px;position:relative}
+.scale .track{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line)}
+.scale .track span{font-size:12px;color:var(--muted);padding-top:10px;text-align:center;border-left:1px solid var(--line);height:28px}
+.scale .track span:first-child{border-left:0}
+.pin{position:absolute;top:-6px;width:11px;height:11px;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 4px var(--bg)}
+.pin.g{background:var(--ink)} .pin.v{background:var(--accent)}
+.legend{display:flex;gap:20px;font-size:13px;color:var(--muted);margin-top:4px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:36px}
+@media (max-width:560px){.grid3,.grid2{grid-template-columns:1fr}}
+.stat{border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:18px 20px}
+.stat .v{font-family:var(--serif);font-size:34px;line-height:1.1;margin:6px 0 4px}
+.stat .s{font-size:13px;color:var(--muted)}
+.sect{margin-top:44px}
+.sect h3{font-family:var(--serif);font-weight:400;font-size:22px;margin-bottom:14px}
+.topics{display:flex;flex-wrap:wrap;gap:8px}
+.topic{font-size:14px;padding:7px 13px;border-radius:999px;background:var(--warn-soft);color:var(--warn)}
+.topic b{font-weight:600;margin-right:6px}
+details{border-top:1px solid var(--line);padding-top:6px}
+summary{cursor:pointer;padding:14px 0;font-weight:500;list-style:none;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-family:var(--serif);font-size:22px;line-height:1;color:var(--muted)}
+details[open] summary::after{content:'–'}
+.rev{padding:14px 0;border-top:1px dashed var(--line);font-size:15px}
+.rev .p{font-family:var(--serif);font-size:18px;margin-bottom:6px}
+.rev .a{color:var(--muted)} .rev .a s{color:var(--warn)} .rev .a b{color:var(--accent);font-weight:600}
+.rev .l{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.note{margin-top:32px;font-size:13px;color:var(--muted);max-width:560px}
+.sent{font-size:13px;color:var(--accent);margin-top:14px}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">NOEON<small>Level Test</small></div>
+    <div class="step" id="step"></div>
+  </header>
+  <main id="view" aria-live="polite"></main>
+  <div class="foot">Beyond Knowing</div>
+</div>
+<script>
+/* ===================== SETTINGS ===================== */
+// Billy: заполните, чтобы результаты приходили в Telegram. Если пусто — отправка отключена.
+const CONFIG = {
+  telegramToken: '8791744004:AAHatQY3IDUAiZioQTi5JQ3Eqj4-sdOyqUg',
+  telegramChatId: '137492894',
+  // минимум / максимум вопросов на каждую шкалу и целевая точность
+  limits: {G: {min: 8, max: 16}, V: {min: 10, max: 19}},
+  seTarget: 0.36
+};
+
+/* ===================== ITEM BANK ===================== */
+// Format: TYPE|LEVEL|topic|prompt|correct|distractor1|distractor2|distractor3
+// TYPE: G = grammar (choice), V = vocabulary (choice), VT = vocabulary (typed; answers separated by /)
+// LEVEL: A1..C2, optional + / - for fine difficulty
+const GRAMMAR = `
+G|A1|to be|My sister ___ a nurse.|is|are|am|be
+G|A1|to be|We ___ from Spain.|are|is|am|be
+G|A1-|to be|___ you hungry?|Are|Is|Do|Am
+G|A1|present simple|He ___ coffee every morning.|drinks|drink|drinking|is drink
+G|A1|present simple|I ___ like fish.|don't|doesn't|not|am not
+G|A1+|present simple|___ she work in a bank?|Does|Do|Is|Has
+G|A1|articles|She is ___ engineer.|an|a|any|some
+G|A1|there is / are|There ___ two cats in the garden.|are|is|be|has
+G|A1+|there is / are|___ there a bank near here?|Is|Are|Does|Has
+G|A1|can|She ___ swim very well.|can|cans|can to|is can
+G|A1+|plurals|I've got three ___.|children|childs|child|childrens
+G|A1-|possessives|This is ___ book. It belongs to me.|my|me|I|mine
+G|A1|object pronouns|I like Tom. I see ___ every day.|him|he|his|her
+G|A1|prepositions of time|The lesson starts ___ 9 o'clock.|at|in|on|to
+G|A1|prepositions of time|My birthday is ___ May.|in|on|at|to
+G|A1-|prepositions of place|The keys are ___ the table.|on|in|of|to
+G|A1|this / these|___ shoes are very nice.|These|This|That|It
+G|A1+|have got|___ you got a car?|Have|Has|Do|Are
+G|A1-|imperative|___ the door, please.|Close|Closes|Closing|To close
+G|A1|present simple|They ___ TV in the evening.|watch|watches|watching|is watch
+G|A1-|question words|___ is your name?|What|Who|Where|How
+G|A1|question words|___ do you live? — In London.|Where|What|When|Who
+G|A1+|adverbs of frequency|I ___ get up at seven.|usually|usual|use|am usually
+G|A1+|like + -ing|I like ___ books.|reading|read|reads|to reading
+G|A2|past simple|We ___ to Paris last summer.|went|go|gone|have gone
+G|A2-|past simple|___ you see the film yesterday?|Did|Do|Were|Have
+G|A2|past simple|She ___ come to the party last night.|didn't|doesn't|wasn't|hasn't
+G|A2-|present continuous|Be quiet! The baby ___.|is sleeping|sleeps|sleep|sleeping
+G|A2-|present continuous|Look! It ___.|is raining|rains|rain|raining
+G|A2-|comparatives|My brother is ___ than me.|taller|more tall|tallest|the taller
+G|A2|comparatives|This book is ___ than that one.|more interesting|interestinger|most interesting|interesting
+G|A2|superlatives|It's ___ day of the year.|the hottest|the most hot|hotter|hottest
+G|A2|superlatives|She is the ___ student in our class.|best|better|goodest|most good
+G|A2+|going to|Look at those clouds! It ___ rain.|is going to|will be|goes to|is going
+G|A2|will|I'm tired. I think I ___ go to bed.|'ll|am|go|going
+G|A2|countable / uncountable|How ___ money do you have?|much|many|lot|few
+G|A2|some / any|There aren't ___ apples left.|any|some|no|much
+G|A2+|past continuous|I ___ a shower when the phone rang.|was having|were having|am having|have had
+G|A2|present perfect|I ___ never been to Japan.|have|has|am|did
+G|A2+|present perfect|Have you ever ___ sushi?|eaten|ate|eat|eating
+G|A2+|must / have to|You ___ wear a seatbelt in a car. It's the law.|have to|has to|don't have to|mustn't
+G|A2|should|You look ill. You ___ see a doctor.|should|shouldn't|mustn't|don't have to
+G|A2+|possessive pronouns|This bag isn't mine. It's ___.|hers|her|she|her's
+G|A2|adverbs of manner|He drives very ___.|carefully|careful|care|carefuly
+G|A2|prepositions|I'm interested ___ history.|in|on|at|about
+G|A2+|infinitive of purpose|I went to the shop ___ some bread.|to buy|for buy|for buying|buying
+G|A2-|was / were|Where ___ you yesterday?|were|was|did|are
+G|A2|past simple irregular|I ___ my keys yesterday.|lost|losed|lose|have lost
+G|A2+|quantifiers|I need ___ help with my homework.|a little|a few|many|few
+G|B1|present perfect vs past simple|I ___ here since 2019.|have lived|lived|live|am living
+G|B1-|present perfect vs past simple|She ___ her homework an hour ago.|finished|has finished|finishes|have finished
+G|B1-|for / since|They've known each other ___ ten years.|for|since|during|from
+G|B1-|yet / already|I haven't finished my essay ___.|yet|already|still|just
+G|B1-|first conditional|If it ___ tomorrow, we'll stay at home.|rains|will rain|rained|would rain
+G|B1|second conditional|If I ___ rich, I would travel the world.|were|am|will be|would be
+G|B1|second conditional|What would you do if you ___ a million dollars?|won|win|will win|would win
+G|B1|passive|This bridge ___ in 1890.|was built|built|is built|has built
+G|B1-|passive|English ___ all over the world.|is spoken|speaks|is speaking|spoken
+G|B1|used to|I ___ play football when I was a child.|used to|use to|was used to|am used to
+G|B1-|relative clauses|The woman ___ lives next door is a doctor.|who|which|whose|what
+G|B1+|relative clauses|That's the man ___ car was stolen.|whose|who|which|that
+G|B1-|gerund / infinitive|I enjoy ___ in the mountains.|walking|to walk|walk|to walking
+G|B1|gerund / infinitive|We decided ___ a new car.|to buy|buying|buy|to buying
+G|B1|reported speech|She said she ___ tired.|was|were|be|has
+G|B1+|reported speech|He told me ___ late.|not to be|don't be|to not being|not be
+G|B1-|too / enough|The coffee is ___ hot to drink.|too|enough|so|very
+G|B1|too / enough|He isn't old ___ to drive.|enough|too|so|such
+G|B1|modals of deduction|She ___ be at home — her car is outside.|must|can't|mustn't|has
+G|B1+|question tags|You're from Italy, ___?|aren't you|are you|don't you|isn't it
+G|B1+|past perfect|When I arrived, the film ___ already started.|had|has|was|did
+G|B1+|so / such|It was ___ a good film that I watched it twice.|such|so|too|very
+G|B1|future arrangements|I ___ my grandmother this Sunday. We arranged it last week.|am visiting|visit|visited|have visited
+G|B1+|indirect questions|Could you tell me where ___?|the station is|is the station|the station|does the station be
+G|B1|verb + preposition|It depends ___ the weather.|on|of|from|in
+G|B2|third conditional|If you had told me, I ___ you.|would have helped|would help|had helped|will have helped
+G|B2|third conditional|We would have caught the train if we ___ earlier.|had left|left|would leave|have left
+G|B2-|wish (present)|I wish I ___ more time for my hobbies.|had|have|will have|would have had
+G|B2|wish (past)|I wish I ___ that. It was a mistake.|hadn't said|didn't say|wouldn't say|haven't said
+G|B2+|modal perfect|You ___ have seen Tom yesterday — he's in Australia.|can't|mustn't|shouldn't|needn't
+G|B2|modal perfect|The road is wet. It ___ rained last night.|must have|should have|can have|must
+G|B2|causative|I'm ___ my hair cut tomorrow.|having|making|doing|letting
+G|B2-|passive (continuous)|The new hospital ___ at the moment.|is being built|is building|builds|has been building
+G|B2|reported questions|She asked me where ___.|I lived|did I live|do I live|lived I
+G|B2|future perfect|By next June, I ___ my degree.|will have finished|will have finish|am finished|have finished
+G|B2|future continuous|This time tomorrow I ___ on a beach in Greece.|will be lying|will lie|lie|am lain
+G|B2-|non-defining relative clauses|My father, ___ is 60, still plays tennis.|who|that|which|whom
+G|B2-|concession|___ the rain, we went for a walk.|Despite|Although|However|Even though
+G|B2-|concession|___ it was late, she kept working.|Although|Despite|In spite of|However
+G|B2|verb patterns|I remember ___ him at the conference last year.|meeting|to meet|meet|to have meet
+G|B2+|verb patterns|She stopped ___ a cigarette and then continued her walk.|to smoke|smoking|smoke|to smoking
+G|B2|articles|___ Netherlands is famous for its tulips.|The|A|—|An
+G|B2+|articles|___ life is too short to worry about small things.|—|The|A|An
+G|B2-|present perfect continuous|I'm exhausted. I ___ all day.|have been working|am working|had been working|have been work
+G|B2+|unreal past|It's time we ___ home.|went|go|will go|going
+G|B2+|would rather|I'd rather you ___ smoke in here.|didn't|don't|won't|not
+G|B2|be used to|She isn't used to ___ up so early.|getting|get|got|have got
+G|B2-|-ed / -ing adjectives|The film was really ___. I almost fell asleep.|boring|bored|bore|bores
+G|B2-|unless|You won't pass ___ you study harder.|unless|if|until|provided
+G|B2+|passive gerund|He hates ___ what to do.|being told|telling|to tell|be told
+G|B2|purpose|I left early ___ I wouldn't miss the bus.|so that|in order|so as|for
+G|C1|inversion|Never ___ such a beautiful sunset.|have I seen|I have seen|I saw|did I saw
+G|C1|inversion|Not only ___ late, but he also forgot the tickets.|was he|he was|he is|did he be
+G|C1+|inversion|Hardly ___ arrived when the phone rang.|had we|we had|have we|did we
+G|C1|mixed conditionals|If I had taken that job, I ___ in London now.|would be living|would have lived|will live|had lived
+G|C1+|mixed conditionals|If she ___ so stubborn, she would have accepted our help.|weren't|isn't|won't be|wouldn't be
+G|C1-|cleft sentences|___ I need is a long holiday.|What|That|Which|It
+G|C1|cleft sentences|It was only when I got home ___ I realised I'd lost my wallet.|that|when|which|what
+G|C1+|subjunctive|The board insisted that he ___ present at the meeting.|be|is|being|to be
+G|C1-|participle clauses|___ the report, she sent it to her manager.|Having finished|Finished|Being finished|Have finished
+G|C1|participle clauses|___ from a distance, the castle looked enormous.|Seen|Seeing|Having seen|To see
+G|C1|modal perfect|You ___ have bought a present — it wasn't necessary, but thank you!|needn't|mustn't|can't|wouldn't
+G|C1-|modal perfect|I ___ have studied harder; I failed the exam.|should|must|would|can
+G|C1|it's high time|It's high time the government ___ something about pollution.|did|does|will do|has done
+G|C1-|emphatic do|I ___ understand your concerns, but we have no choice.|do|am|have|did to
+G|C1|future in the past|I had no idea that she ___ leave the company a month later.|would|will|is going to|shall
+G|C1-|wish + would|I wish my neighbours ___ playing loud music at night.|would stop|will stop|stop|have stopped
+G|C1+|passive reporting|He is said ___ a fortune in the 1990s.|to have made|to make|having made|that he made
+G|C1|passive reporting|It ___ that the company will cut 500 jobs.|is reported|reports|is reporting|has reported
+G|C1|conditionals without if|___ you need any help, just call me.|Should|Would|Had|Were
+G|C1+|conditionals without if|___ I known about the problem, I would have fixed it.|Had|If|Have|Should
+G|C1|as if|He's not my boss, but he talks to me as if he ___ my boss.|were|is|be|has been
+G|C1-|neither / either|___ of the two answers is correct — they're both wrong.|Neither|None|Either|Both
+G|C1|relative clauses with prepositions|The person to ___ I spoke was very helpful.|whom|who|which|that
+G|C1|substitution|"Will it rain tomorrow?" — "I hope ___."|not|no|don't|it not
+G|C1-|compound adjectives|We went on a ___ holiday.|two-week|two-weeks|two-weekly|two-week's
+G|C2|inversion|Little ___ that his life was about to change forever.|did he know|he knew|knew he|he did know
+G|C2-|inversion|So difficult ___ that few students finished it.|was the exam|the exam was|did the exam be|the exam it was
+G|C2-|inversion|Only after the guests had left ___ to relax.|did we begin|we began|we did begin|began we
+G|C2|conditionals|___ for your support, I would never have succeeded.|Had it not been|If it hadn't|Had not it been|Unless it had been
+G|C2|conditionals|___ it not for the rain, the match would be going ahead today.|Were|Was|Had|Should
+G|C2+|fronting|Try ___ he might, he couldn't open the jar.|as|if|so|what
+G|C2-|concessive clauses|___ much I admire her, I can't agree with her on this.|However|Whatever|Although|Despite
+G|C2|unreal past|Suppose you ___ the truth — how would she have reacted?|had told|told|have told|would tell
+G|C2|would rather|I'd rather you ___ him about it yesterday.|hadn't told|didn't tell|wouldn't tell|haven't told
+G|C2-|participle clauses|___ all his savings, he had no choice but to borrow money.|Having spent|Spending|Spent|Being spent
+G|C2|passive infinitive|The house appears ___ for years.|to have been abandoned|to be abandoning|to have abandoned|having been abandoned
+G|C2+|fixed subjunctive|___ it may, we must continue.|Be that as|Be as that|As be that|That be as
+G|C2+|set phrases|He is, ___, the heart of the team.|as it were|as it was|as were it|so it were
+G|C2|modal nuance|You ___ have warned me! I nearly fell into the hole.|might|must|would|can
+G|C2|negative inversion|At no time ___ aware of the danger.|were the passengers|the passengers were|the passengers had|did the passengers be
+G|C2-|cleft sentences|___ was not until midnight that the results were announced.|It|That|What|There
+G|C2|relative clauses|He made several suggestions, none of ___ were accepted.|which|them|that|what
+G|C2-|whatever / no matter|___ happens, don't open the door.|Whatever|However|Whenever|No matter
+G|C2|tense nuance|I ___ to call you, but my phone died.|was going|went|would go|am going
+G|C2|nominal clauses|___ he will accept the offer remains to be seen.|Whether|If|That|What
+G|C2-|verb patterns|She is thought ___ the country last week.|to have left|to leave|leaving|that she left
+G|C2+|emphatic ellipsis|He said he would finish the report, and finish it he ___.|did|had|would|was
+G|C2+|lest|She spoke quietly lest she ___ the baby.|wake|woke|wakes|will wake
+G|C2|for all|___ all his wealth, he was deeply unhappy.|For|Despite of|In spite|Although
+G|A1|to be|I ___ not tired.|am|is|are|be
+G|A1-|present simple|My father ___ in an office.|works|work|working|is work
+G|A1|present simple|We ___ live in a big city.|don't|doesn't|aren't|not
+G|A1|articles|I want ___ apple.|an|a|some|any
+G|A1|there is / are|There ___ a cat on the sofa.|is|are|be|have
+G|A1|can|___ you speak French?|Can|Do can|Are|Does
+G|A1+|possessive 's|This is ___ car.|my brother's|my brothers|my brother|brother's my
+G|A1|prepositions of time|I play tennis ___ Saturday.|on|in|at|to
+G|A1+|present continuous|I ___ a book now.|am reading|read|reading|reads
+G|A1|object pronouns|Can you help ___? I'm lost.|me|I|my|mine
+G|A1-|plurals|I have two ___.|brothers|brother|brotheres|brother's
+G|A2|past simple|What time ___ you get home last night?|did|do|were|have
+G|A2-|past simple|They ___ at home yesterday evening.|were|was|did|are
+G|A2+|present perfect|She has just ___ her lunch.|finished|finish|finishing|finishes
+G|A2|comparatives|Today is ___ than yesterday.|colder|more cold|coldest|the colder
+G|A2+|as ... as|My car isn't as fast ___ yours.|as|than|like|that
+G|A2|countable / uncountable|There isn't ___ milk in the fridge.|much|many|a|few
+G|A2|will|— The phone is ringing. — I ___ answer it.|'ll|am going|answer|answering
+G|A2+|should|You ___ eat so much sugar. It's bad for you.|shouldn't|should|don't must|haven't to
+G|A2|prepositions of place|The cinema is ___ the bank and the post office.|between|among|next|opposite of
+G|A2+|past continuous|What ___ you doing at 8 pm yesterday?|were|did|was|are
+G|B1|present perfect|How long ___ you known her?|have|did|are|do
+G|B1+|present perfect continuous|She ___ for two hours and she still hasn't finished.|has been studying|studied|is studying|studies
+G|B1-|zero conditional|If you heat ice, it ___.|melts|melted|would melt|had melted
+G|B1|passive|My phone ___ last night.|was stolen|stole|is stolen|has stolen
+G|B1+|passive|The letters ___ every morning.|are delivered|deliver|are delivering|delivered
+G|B1|modals of obligation|You ___ pay — it's free.|don't have to|mustn't|have to|must
+G|B1|relative clauses|This is the house ___ I was born.|where|which|who|what
+G|B1-|comparatives|The more you practise, the ___ you get.|better|best|good|more good
+G|B1+|reported speech|He asked me if I ___ him.|could help|can helped|helped to|could helping
+G|B1|gerund / infinitive|I'm thinking of ___ a new job.|finding|to find|find|found
+G|B1-|will|I promise I ___ tell anyone.|won't|don't|am not|haven't
+G|B2|passive (perfect)|The documents ___ already been signed.|have|has|are|were
+G|B2+|modal perfect|She ___ have taken the bus — her car is still here.|must|can't|should|needn't
+G|B2|third conditional|If he hadn't been so tired, he ___ the accident.|wouldn't have had|wouldn't have|won't have had|hadn't had
+G|B2|reported speech|"I'll call you tomorrow," she said. → She said she ___ me the next day.|would call|will call|called|calls
+G|B2-|articles|She's ___ best teacher I've ever had.|the|a|—|an
+G|B2|verb patterns|They made me ___ the whole report again.|write|to write|writing|wrote
+G|B2+|be used to|I'm not used to ___ in such a noisy place.|working|work|worked|have worked
+G|B2|causative|We had our house ___ last year.|painted|paint|painting|to paint
+G|B2-|concession|___ being tired, he went to the gym.|Despite|Although|Even|However
+G|B2+|future perfect continuous|By June, I ___ here for ten years.|will have been working|will be working|will work|have been working
+G|B2|wish (past)|She wishes she ___ to the party last night.|had gone|went|would go|has gone
+G|C1|inversion|Under no circumstances ___ the door.|should you open|you should open|you open|open you
+G|C1+|inversion|Rarely ___ such dedication in a young player.|does one see|one sees|one does see|sees one
+G|C1|mixed conditionals|If I spoke Chinese, I ___ that job last year.|would have got|would get|had got|will have got
+G|C1-|participle clauses|___ in 1890, the bridge is still in use.|Built|Building|Having building|Being build
+G|C1|modal perfect|He ___ have left already — his coat is still here.|can't|mustn't|needn't|shouldn't
+G|C1+|passive reporting|The thieves are believed ___ through the window.|to have entered|to enter|entering|that they entered
+G|C1|cleft sentences|What annoys me ___ his constant lateness.|is|it is|are|was being
+G|C1|unreal past|Supposing you ___ the lottery, what would you do?|won|win|will win|would win
+G|C1-|quantifiers|___ student in the class passed the exam.|Every|All|Both|Whole
+G|C1|subjunctive|It is vital that he ___ informed immediately.|be|is being|will be|been
+G|C1+|would prefer|I'd prefer it if you ___ tell anyone.|didn't|don't|wouldn't|won't
+G|C2|inversion|Not until the end of the film ___ who the killer was.|did we realise|we realised|realised we|we did realise
+G|C2|inversion|Such ___ the force of the storm that trees were uprooted.|was|were|did|had
+G|C2+|conditionals|But for his help, we ___ in serious trouble now.|would be|would have been|will be|are
+G|C2|fixed subjunctive|Far ___ it from me to criticise, but your essay is too long.|be|is|was|being
+G|C2-|participle clauses|The weather ___ fine, we decided to have a picnic.|being|been|was|is being
+G|C2|modal nuance|You ___ well be right, but I still want to check.|may|must|shall|should
+G|C2|nominal clauses|___ we need now is patience.|What|That|Which|Whatever
+G|C2-|verb patterns|There's no point ___ about it now.|worrying|to worry|worry|for worrying
+G|C2|inversion (conditional)|___ the government to raise taxes, there would be protests.|Were|Should|Had|If
+G|C2+|tense nuance|By the time she arrives, we ___ for three hours.|will have been waiting|will wait|are waiting|would have waited
+G|C2|inversion|So quickly ___ that nobody saw him leave.|did he move|he moved|moved he|he did move
+`;
+
+const VOCAB = `
+V|A1-|family|My mother's mother is my ___.|grandmother|aunt|sister|daughter
+V|A1-|food and drink|I drink ___ every morning.|coffee|bread|cheese|rice
+V|A1-|days|The day after Monday is ___.|Tuesday|Sunday|Thursday|Friday
+V|A1-|opposites|The opposite of "hot" is ___.|cold|warm|wet|tall
+V|A1-|opposites|The opposite of "big" is ___.|small|long|old|fat
+V|A1|home|I sleep in my ___.|bedroom|kitchen|garden|bathroom
+V|A1|jobs|A ___ works in a hospital and helps sick people.|doctor|teacher|driver|farmer
+V|A1|weather|Take an umbrella. It's ___.|raining|sunny|hot|windy
+V|A1-|colours|The sky is ___ on a sunny day.|blue|green|black|brown
+V|A1-|body|You see with your ___.|eyes|ears|hands|feet
+V|A1|numbers|Twelve minus two is ___.|ten|eight|twenty|fourteen
+V|A1|time|There are sixty minutes in an ___.|hour|day|week|second
+V|A1+|clothes|In winter I wear a warm ___.|coat|T-shirt|shorts|sandal
+V|A1|transport|A ___ flies in the sky.|plane|train|ship|bus
+V|A1+|everyday verbs|I ___ my teeth twice a day.|brush|comb|cut|wear
+V|A1+|shopping|How much does this shirt ___?|cost|pay|buy|price
+V|A1|everyday verbs|Can you ___ the window? It's hot in here.|open|close|turn|put
+V|A1-|food and drink|An apple is a ___.|fruit|vegetable|drink|meat
+V|A1+|places|You can borrow books from a ___.|library|bakery|bank|cinema
+V|A1|feelings|I didn't eat breakfast, so I'm very ___.|hungry|thirsty|angry|cold
+V|A1-|months|The first month of the year is ___.|January|June|March|December
+V|A1+|everyday verbs|I ___ to music every day.|listen|hear|watch|look
+V|A1|school|Please write your name with a ___.|pen|book|desk|bag
+V|A1|adjectives|The film was very ___. I laughed a lot.|funny|sad|boring|scary
+V|A2-|collocations|I need to ___ my homework tonight.|do|make|have|take
+V|A2|collocations|Can I ___ a photo of you?|take|make|do|get
+V|A2|phrasal verbs|Please ___ your shoes before you come in.|take off|put on|turn off|get up
+V|A2-|phrasal verbs|I ___ at 7 o'clock every morning.|get up|get on|get off|get over
+V|A2|travel|We ___ a room at a hotel near the beach.|booked|paid|stayed|visited
+V|A2|health|I have a terrible ___ — I need some aspirin.|headache|head|hurt|pain head
+V|A2+|work|My sister is looking for a new ___.|job|work|worker|employ
+V|A2-|money|Can I ___ by credit card?|pay|buy|spend|cost
+V|A2|time|I'll see you ___ week.|next|after|following|last
+V|A2-|adjectives|This exercise is very ___. I can't do it.|difficult|easy|simple|clear
+V|A2+|confusing verbs|Could you ___ me your pen? I'll give it back tomorrow.|lend|borrow|take|keep
+V|A2|confusing verbs|My grandmother ___ me how to cook.|taught|learned|studied|showed to
+V|A2-|weather|It's very ___ today. Wear a hat and gloves.|cold|warm|sunny|hot
+V|A2|places|You can see famous paintings in a ___.|museum|stadium|pharmacy|supermarket
+V|A2|personality|She always helps other people. She's very ___.|kind|lazy|rude|shy
+V|A2|school|I missed the bus, so I was ___ for school.|late|early|slow|behind
+V|A2|cooking|Can you ___ the vegetables into small pieces?|cut|break|open|cook
+V|A2-|home|Please ___ the lights when you leave.|turn off|turn on|turn up|turn into
+V|A2|feelings|I'm ___ about my exam tomorrow.|nervous|boring|tired|bored
+V|A2+|shopping|These jeans look too small. Can I ___ them on?|try|put|wear|test
+V|A2+|holidays|We spent two weeks ___ holiday in Italy.|on|in|at|for
+V|A2|daily routine|I ___ a shower every morning.|have|make|do|get
+V|A2|communication|Can you ___ me a message when you arrive?|send|say|tell|speak
+V|A2+|shopping|The shop is ___ on Sundays, so we can't go.|closed|close|shut down|empty
+V|A2-|countries|People in Germany speak ___.|German|Germanish|Germany|Germanic
+V|B1|phrasal verbs|Can you ___ my cat while I'm on holiday?|look after|look for|look up|look into
+V|B1-|phrasal verbs|I'm going to ___ smoking next year.|give up|give in|give away|give back
+V|B1+|phrasal verbs|We've ___ milk. Can you buy some?|run out of|run into|run away from|run over
+V|B1-|collocations|He ___ a mistake in the test.|made|did|took|had
+V|B1|collocations|I have to ___ a decision by Friday.|make|do|put|get
+V|B1+|collocations|She ___ attention to every detail.|pays|gives|makes|puts
+V|B1|confusing words|The ___ of living in London is very high.|cost|price|value|money
+V|B1-|confusing words|Could you ___ me the way to the station?|tell|say|speak|explain
+V|B1+|confusing words|I'm sorry, I ___ my umbrella at the restaurant.|left|forgot about|missed|stayed
+V|B1|word formation|He's a very ___ driver. He never takes risks.|careful|careless|caring|carefully
+V|B1|word formation|The ___ of the city has grown to two million.|population|people|popularity|public
+V|B1-|-ed / -ing adjectives|I was very ___ by the news.|surprised|surprising|surprise|surprisingly
+V|B1|work|She ___ for a job at a big company.|applied|asked|requested|demanded
+V|B1|travel|Our flight was ___ because of the snow.|cancelled|stopped|finished|closed
+V|B1|environment|We should ___ paper and plastic.|recycle|rubbish|throw|waste
+V|B1|technology|I can't ___ to the Wi-Fi.|connect|join to|enter|attach
+V|B1-|education|If you don't study, you'll ___ the exam.|fail|lose|miss|drop
+V|B1+|fixed phrases|I'm really looking forward ___ you.|to seeing|to see|for seeing|seeing
+V|B1|money|I want to ___ money to buy a car.|save|keep|earn up|win back
+V|B1-|relationships|They ___ married last year.|got|made|became|did
+V|B1|crime|The police ___ the thief yesterday.|arrested|robbed|stole|accused
+V|B1+|health|You should ___ a diet if you want to lose weight.|go on|make|do on|take on
+V|B1-|prepositions|I'm not very good ___ maths.|at|in|on|with
+V|B1|synonyms|"Enormous" means very ___.|big|small|old|fast
+V|B1|confusing words|The museum is free. You don't have to pay to ___ it.|enter|come|arrive|go
+V|B2|phrasal verbs|I can't ___ with his rudeness any longer.|put up|put off|put away|put out
+V|B2|phrasal verbs|The meeting has been ___ until next week.|put off|called off|turned down|taken off
+V|B2-|phrasal verbs|She ___ the job offer because the salary was too low.|turned down|turned up|turned over|turned out
+V|B2+|phrasal verbs|It ___ that he had been lying all along.|turned out|found out|made out|figured out
+V|B2-|collocations|The company has ___ a lot of progress this year.|made|done|taken|got
+V|B2|collocations|We need to ___ action immediately.|take|make|do|put
+V|B2-|collocations|There was ___ rain all night.|heavy|strong|big|thick
+V|B2+|collocations|I have a ___ headache.|splitting|breaking|cracking|tearing
+VT|B2|word formation|There is a big ___ between the two theories. (DIFFER)|difference
+VT|B2+|word formation|She spoke with great ___ about her work. (ENTHUSIASTIC)|enthusiasm
+VT|B2|word formation|The ___ of the new road took three years. (CONSTRUCT)|construction
+VT|B2|word formation|His story was completely ___ — nobody believed it. (BELIEVE)|unbelievable
+VT|B2-|word formation|We were ___ to find a taxi, so we walked. (ABLE)|unable
+V|B2|collocations|The ___ effects of the drug include headaches.|side|secondary|extra|by
+V|B2|confusing words|He was ___ of stealing the money.|accused|blamed|charged|arrested
+V|B2|idioms|I'm feeling a bit under the ___ today — I think I've got a cold.|weather|rain|cloud|sky
+V|B2-|idioms|Learning to drive was a ___ of cake for her.|piece|slice|bit|part
+V|B2-|work|He was ___ for being late too often.|fired|resigned|retired|quit
+V|B2|work|She got a ___ and now earns much more.|promotion|progress|profit|benefit
+V|B2+|synonyms|The meaning of "reluctant" is closest to ___.|unwilling|unable|unhappy|uncertain
+V|B2|synonyms|"To postpone" means to ___.|delay|cancel|prepare|announce
+V|B2|linking words|The plan was expensive. ___, it was a great success.|Nevertheless|Therefore|Moreover|Because
+V|B2-|prepositions|She is very proud ___ her son.|of|for|about|with
+V|B2+|confusing words|This medicine is very ___ against flu.|effective|efficient|affective|effected
+V|B2+|environment|Many species are ___ with extinction.|threatened|endangered|dangered|risked
+V|B2|collocations|I'd like to ___ a complaint about the service.|make|do|say|tell
+V|C1|collocations|The new law came into ___ last month.|force|power|strength|action
+V|C1|phrasal verbs|The government has promised to ___ down on tax evasion.|crack|break|knock|shut
+V|C1-|phrasal verbs|I can't ___ out what he's saying — the line is bad.|make|work|find|turn
+V|C1|phrasal verbs|Unfortunately, the deal ___ through at the last minute, so we lost the contract.|fell|went|came|broke
+V|C1+|collocations|She finally ___ up the courage to ask for a pay rise.|plucked|took|made|held
+VT|C1|word formation|The ___ of the documents was confirmed by experts. (AUTHENTIC)|authenticity
+VT|C1-|word formation|His behaviour was completely ___ for a man in his position. (APPROPRIATE)|inappropriate
+VT|C1|word formation|The company's ___ to adapt led to its collapse. (ABLE)|inability
+VT|C1-|word formation|Prices have risen ___ over the past year. (DRAMATIC)|dramatically
+VT|C1+|word formation|There is growing ___ that the plan will fail. (SUSPECT)|suspicion
+V|C1-|confusing words|After hours of negotiation, the two sides finally reached a ___.|compromise|comprise|compromising|promise
+V|C1|nuance|The evidence was so ___ that the jury had no doubts.|compelling|compulsive|compulsory|complacent
+V|C1+|nuance|He gave a ___ account of the events, leaving nothing out.|meticulous|meticulously|meddling|mundane
+V|C1|synonyms|"Ubiquitous" means ___.|found everywhere|very rare|extremely old|hard to see
+V|C1|synonyms|A "frugal" person is ___.|careful with money|very generous|always late|easily angered
+V|C1-|idioms|Let's not beat about the ___. Tell me what happened.|bush|tree|garden|grass
+V|C1|idioms|The two candidates are neck and ___ in the polls.|neck|head|shoulder|nose
+V|C1-|confusing words|The new policy will ___ everyone in the company.|affect|effect|infect|afflict
+V|C1|formal register|We ___ any inconvenience this may cause.|regret|are sad about|feel bad for|are sorry of
+V|C1+|linking words|___ the fact that he was injured, he finished the race.|Notwithstanding|Nevertheless|Although|Even so
+V|C1|collocations|The film received ___ reviews from critics.|rave|raving|praising|raven
+V|C1+|idioms|His argument doesn't hold ___.|water|air|ground|weight
+V|C1+|collocations|She bore the ___ of the criticism.|brunt|bulk|blunt|front
+V|C1|collocations|We need to ___ a balance between work and family.|strike|hit|beat|knock
+V|C1+|collocations|It's a ___ conclusion that she'll get the job.|foregone|forgiven|forthcoming|forward
+V|C1-|collocations|He is a ___ smoker — about forty cigarettes a day.|heavy|strong|big|hard
+V|C2|nuance|His speech was so ___ that half the audience fell asleep.|soporific|sophisticated|sporadic|salubrious
+V|C2-|nuance|The politician gave an ___ answer, avoiding the question entirely.|evasive|invasive|elusive|evocative
+V|C2|nuance|She has an ___ ability to predict market trends.|uncanny|uncouth|unkempt|unwieldy
+V|C2-|nuance|The once ___ city is now almost deserted.|thriving|thrifty|thrashing|throbbing
+V|C2-|synonyms|"Ephemeral" means ___.|lasting a very short time|extremely valuable|easily broken|widely known
+V|C2-|synonyms|To "exacerbate" a problem means to ___.|make it worse|solve it|ignore it|explain it
+V|C2|synonyms|A "laconic" reply is ___.|using very few words|very rude|full of emotion|completely untrue
+V|C2+|synonyms|"Obsequious" behaviour is ___.|excessively eager to please|deliberately rude|hard to understand|openly dishonest
+V|C2|idioms|After the scandal, the minister was forced to ___ the music.|face|hear|play|meet
+V|C2|idioms|Don't worry about those details — that's just splitting ___.|hairs|straws|ends|words
+V|C2|idioms|He's been resting on his ___ since he won the award.|laurels|honours|merits|trophies
+V|C2|collocations|The project is still at the ___ stage.|embryonic|infantile|juvenile|prenatal
+V|C2-|collocations|The rumours are completely ___ — there's no evidence at all.|unfounded|unfunded|unfounding|founded
+V|C2-|collocations|She was ___ with praise after her performance.|showered|rained|drizzled|poured
+V|C2|nuance|He made a ___ attempt to escape, but it was hopeless.|futile|fertile|feudal|frugal
+V|C2|phrasal verbs|Don't worry, the scandal will soon ___ over.|blow|fly|go|pass
+V|C2|idioms|The lawyer tried to ___ holes in the witness's story.|pick|dig|make|cut
+VT|C2|word formation|The film was criticised for its ___ of historical events. (REPRESENT)|misrepresentation
+VT|C2-|word formation|The ___ of the proposal surprised everyone. (BOLD)|boldness
+VT|C2|word formation|Her research was ___ in changing government policy. (INSTRUMENT)|instrumental
+VT|C2|word formation|The damage is ___; there is no way to fix it. (REPAIR)|irreparable
+V|C2+|formal register|The CEO's remarks were ___ as a sign that job cuts were coming.|construed|constructed|contrived|conceded
+V|C2|nuance|He was ___ by the complexity of the task and nearly gave up.|daunted|haunted|flaunted|vaunted
+V|C2+|nuance|Her ___ wit made her a popular guest at dinner parties.|mordant|mordent|moribund|mundane
+V|A1-|family|My father's brother is my ___.|uncle|cousin|nephew|grandfather
+V|A1|food and drink|I'm thirsty. Can I have a glass of ___?|water|bread|soup|rice
+V|A1|home|We cook dinner in the ___.|kitchen|bedroom|garage|bathroom
+V|A1-|colours|Bananas are ___.|yellow|blue|purple|black
+V|A1|time|There are seven days in a ___.|week|month|year|hour
+V|A1|weather|It's ___ today — let's go to the beach!|sunny|snowy|cold|rainy
+V|A1+|jobs|A ___ teaches children at school.|teacher|pilot|waiter|nurse
+V|A1|everyday verbs|I ___ breakfast at 8 o'clock.|have|do|drink|go
+V|A1+|places|We buy food at the ___.|supermarket|library|hospital|school
+V|A1|opposites|The opposite of "new" is ___.|old|young|small|short
+V|A1-|body|You hear with your ___.|ears|eyes|nose|mouth
+V|A1+|adjectives|This bag is very ___. I can't carry it.|heavy|light|cheap|empty
+V|A2|travel|I'd like a return ___ to Manchester, please.|ticket|card|pass|passport
+V|A2|health|I feel ___. I think I have a cold.|ill|good|well|healthy
+V|A2-|phrasal verbs|Can you ___ the TV? I want to watch the news.|turn on|turn off|turn down|turn round
+V|A2|collocations|Let's ___ a break — we've been working for hours.|take|do|go|put
+V|A2+|phrasal verbs|I'm ___ my glasses. Have you seen them?|looking for|looking at|looking after|looking up
+V|A2|shopping|Excuse me, where do I ___ for these shoes?|pay|buy|spend|cost
+V|A2|personality|He never says hello to anyone. He's quite ___.|unfriendly|helpful|polite|generous
+V|A2+|confusing verbs|Can I ___ your phone for a minute?|borrow|lend|give|let
+V|A2|weather|Drive carefully — there's a lot of ___ on the road.|ice|sun|wind|cloud
+V|A2-|transport|We got ___ the bus at the wrong stop.|off|out|down|away
+V|A2|collocations|I need to ___ my room. It's very messy.|tidy|wash|make|repair
+V|A2+|adjectives|The concert was ___! I loved every minute.|amazing|terrible|boring|awful
+VT|B1|word formation|He is a very ___ person. He always says hello. (FRIEND)|friendly
+VT|B1-|word formation|The ___ of the race got a gold medal. (WIN)|winner
+VT|B1|word formation|It was very ___ of you to forget her birthday. (CARE)|careless
+VT|B1+|word formation|We were surprised by his ___ to leave. (DECIDE)|decision
+V|B1|phrasal verbs|Could you ___ this form, please?|fill in|fill up|fill out of|fill on
+V|B1+|phrasal verbs|I ___ an old friend in town yesterday.|bumped into|bumped up|got into|came over
+V|B1|collocations|It's important to ___ your best in the exam.|do|make|take|have
+V|B1|confusing words|She ___ me to bring my passport.|reminded|remembered|remained|memorised
+V|B1-|travel|We stayed at a small hotel and ___ the city on foot.|explored|discovered|travelled|visited to
+V|B1|money|This watch was very ___ — it cost over £500.|expensive|cheap|valuable to|costly of
+V|B1+|-ed / -ing adjectives|I was ___ when I saw how much the tickets cost.|shocked|shocking|shock|shockingly
+V|B1|technology|Don't forget to ___ your files before you shut down the computer.|save|keep|store up|hold
+V|B1-|synonyms|"Rapid" means ___.|fast|large|loud|careful
+V|B2|phrasal verbs|I need to ___ on my French before the trip.|brush up|wash up|clean up|tidy up
+V|B2-|phrasal verbs|He ___ his father — they have the same eyes and the same laugh.|takes after|looks after|takes over|looks up to
+V|B2|collocations|She ___ a speech at the conference.|gave|said|told|spoke
+V|B2+|collocations|The new rules will ___ effect next month.|take|make|get|have
+V|B2|idioms|I'll keep an ___ on your bag while you're away.|eye|ear|hand|watch
+V|B2|confusing words|The ___ of the experiment was clear: the drug works.|outcome|income|outbreak|outskirts
+V|B2+|confusing words|She's very ___ — she always finishes her tasks ahead of schedule.|efficient|sufficient|deficient|affluent
+VT|B2|word formation|The level of ___ in the city centre is very high. (POLLUTE)|pollution
+VT|B2+|word formation|She gave a very ___ answer to a difficult question. (THOUGHT)|thoughtful
+VT|B2-|word formation|He drove ___ and caused an accident. (CARE)|carelessly
+V|B2|synonyms|"To consume" means to ___.|use up|create|repair|throw away
+V|B2|collocations|We must reduce our carbon ___.|footprint|fingerprint|trace|mark
+V|C1|collocations|The company is ___ to make a record profit this year.|poised|posed|poisoned|pointed
+V|C1-|phrasal verbs|We had to ___ the details of the contract before signing it.|iron out|smooth over|press on|flatten out
+V|C1|phrasal verbs|He tends to ___ his mistakes instead of discussing them openly.|gloss over|run over|look over|go over
+V|C1|idioms|The new manager really ___ the boat by changing everything at once.|rocked|shook|moved|pushed
+V|C1+|confusing words|Her ___ remarks offended several people at the meeting.|tactless|tactful|tactical|tactile
+V|C1|synonyms|"Ambiguous" means ___.|having more than one meaning|very ambitious|completely clear|full of energy
+V|C1|synonyms|To "mitigate" means to ___.|make less severe|make worse|measure|imitate
+VT|C1|word formation|Many people questioned the ___ of the decision. (WISE)|wisdom
+VT|C1-|word formation|Her ___ to detail is remarkable. (ATTEND)|attention
+VT|C1|word formation|The results were ___ for the company. (DISASTER)|disastrous
+V|C1|collocations|She has a ___ grasp of economic theory.|firm|hard|tight|steady
+V|C1-|formal register|Please ___ from smoking in this area.|refrain|restrain|retain|avoid
+V|C2|nuance|His ___ refusal to compromise ended the negotiations.|intransigent|intransitive|innocuous|inadvertent
+V|C2|nuance|The report was full of ___ details that added nothing.|extraneous|extravagant|exuberant|exorbitant
+V|C2-|synonyms|"Ostensibly" means ___.|apparently, but perhaps not really|definitely and openly|secretly|by mistake
+V|C2|synonyms|A "perfunctory" check is ___.|done quickly, with little care|extremely thorough|done in secret|officially required
+V|C2+|synonyms|A "recalcitrant" person is ___.|stubbornly uncooperative|easily frightened|very talkative|deeply religious
+V|C2|idioms|The proposal was ___ in the bud before anyone could discuss it.|nipped|cut|clipped|snipped
+V|C2|idioms|She ___ the gauntlet and accepted the challenge.|picked up|threw down|took off|put down
+V|C2-|collocations|There is a ___ of evidence against him.|wealth|richness|fortune|treasure
+V|C2|collocations|His comments were met with ___ silence.|stony|rocky|stoned|pebbly
+VT|C2|word formation|Nobody could deny the ___ of his argument. (COGENT)|cogency
+VT|C2-|word formation|His jokes were completely ___, so nobody minded them. (OFFEND)|inoffensive
+VT|C2+|word formation|The government's ___ of the crisis was widely criticised. (HANDLE)|mishandling
+`;
+
+// Vocabulary size check: frequency bands (upper bound in words) and real words; pseudowords are traps
+const VOCAB_BANDS = `
+1000|house|water|money|friend|open|happy
+2000|dangerous|weather|borrow|journey|quiet|invite
+3000|ancient|rescue|bargain|scenery|rough|gather
+5000|reluctant|fragile|vague|hazard|thrive|grim
+8000|cumbersome|rampant|dwindle|candid|frugal|meander
+12000|ubiquitous|quaint|garrulous|nonchalant|ostracize|insipid
+20000|pusillanimous|obstreperous|lugubrious|perspicacious|susurrus|crepuscular
+`;
+const PSEUDOWORDS = `plound|brenish|mivoral|dremble|crontish|kleeve|contrimate|florsome|ostrabble|nalter|prendity|scrove|bludfast|fennicate`;
+
+
+/* ===================== ENGINE ===================== */
+const LEVELS = ['A1','A2','B1','B2','C1','C2'];
+const CENTER = {A1:-2.5, A2:-1.5, B1:-0.5, B2:0.5, C1:1.5, C2:2.5};
+const LEVEL_DESC = {
+  A1:'Начальный уровень: базовые слова, простые фразы и конструкции.',
+  A2:'Элементарный уровень: повседневные темы, основные времена.',
+  B1:'Средний уровень: уверенно на знакомые темы, ключевые грамматические конструкции.',
+  B2:'Выше среднего: свободное владение, сложные времена и устойчивые сочетания.',
+  C1:'Продвинутый уровень: тонкости грамматики и богатый, точный словарь.',
+  C2:'Владение в совершенстве: язык на уровне образованного носителя.'
+};
+const SELF = [
+  ['Я только начинаю: знаю алфавит и несколько слов.', -2.8],
+  ['Могу рассказать о себе, семье, покупках простыми фразами.', -1.6],
+  ['Справляюсь в путешествии, понимаю основное в знакомых темах.', -0.5],
+  ['Свободно общаюсь на большинство тем, смотрю сериалы с субтитрами.', 0.5],
+  ['Читаю сложные тексты и говорю бегло и точно.', 1.5],
+  ['Владею английским почти как родным.', 2.4]
+];
+const GRID = []; for (let t=-4.5; t<=4.5001; t+=0.05) GRID.push(+t.toFixed(2));
+
+function parseBank(src){
+  return src.split('\n').map(s=>s.trim()).filter(s=>s && !s.startsWith('#')).map(line=>{
+    const f = line.split('|');
+    const type = f[0], lvRaw = f[1];
+    const lv = lvRaw.slice(0,2);
+    const shift = lvRaw.endsWith('+') ? 0.33 : lvRaw.endsWith('-') ? -0.33 : 0;
+    const it = {type, scale: type[0], level: lv, b: CENTER[lv] + shift, topic: f[2], prompt: f[3]};
+    if (type === 'VT'){ it.answers = f[4].split('/').map(norm); it.c = 0; }
+    else { it.correct = f[4]; it.distractors = f.slice(5); it.c = 0.2; }
+    return it;
+  });
+}
+function vType(topic){
+  if (/word formation/.test(topic)) return 'formation';
+  if (/phrasal/.test(topic)) return 'phrasal';
+  if (/collocation|fixed phrases|prepositions/.test(topic)) return 'collocations';
+  if (/idiom/.test(topic)) return 'idioms';
+  if (/synonym|nuance|register/.test(topic)) return 'meaning';
+  if (/confusing|-ed/.test(topic)) return 'confusing';
+  return 'context';
+}
+const ITEMS = parseBank(GRAMMAR + '\n' + VOCAB).map((it,i)=>(it.id=i, it.vtype = it.scale==='V' ? vType(it.topic) : null, it));
+
+function norm(s){ return String(s).toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g,' ').trim(); }
+const A = 1.7; // discrimination
+function p3(theta, it){ return it.c + (1-it.c)/(1+Math.exp(-A*(theta-it.b))); }
+function p1(theta, it){ return 1/(1+Math.exp(-A*(theta-it.b))); }
+function info(theta, it){
+  const P = p3(theta,it), c = it.c;
+  return A*A*Math.pow(P-c,2)/Math.pow(1-c,2) * (1-P)/P;
+}
+function estimate(sc){
+  const m = sc.prior.m, s = sc.prior.s;
+  let w = GRID.map(t=>Math.exp(-0.5*Math.pow((t-m)/s,2)));
+  for (const r of sc.resp){
+    const it = ITEMS[r.id];
+    w = w.map((x,k)=>{
+      const t = GRID[k];
+      if (r.dk) return x*(1-p1(t,it));
+      const P = p3(t,it);
+      return x*(r.ok ? P : 1-P);
+    });
+  }
+  const sum = w.reduce((a,b)=>a+b,0);
+  const mean = w.reduce((a,x,k)=>a+x*GRID[k],0)/sum;
+  const v = w.reduce((a,x,k)=>a+x*Math.pow(GRID[k]-mean,2),0)/sum;
+  sc.theta = mean; sc.se = Math.sqrt(v);
+}
+function scaleDone(sc){
+  const n = sc.resp.length, L = CONFIG.limits[sc.key];
+  return sc.exhausted || n >= L.max || (n >= L.min && sc.se < CONFIG.seTarget);
+}
+function pickItem(key){
+  const sc = S.scales[key];
+  const recent = sc.resp.slice(-2).map(r=>ITEMS[r.id].topic);
+  let pool = ITEMS.filter(it=>it.scale===key && !S.used.has(it.id));
+  const varied = pool.filter(it=>!recent.includes(it.topic));
+  if (varied.length) pool = varied;
+  pool = pool.map(it=>({it, i: info(sc.theta, it)})).sort((a,b)=>b.i-a.i);
+  if (key === 'V'){
+    // среди 8 самых информативных берём тип заданий, который встречался реже всего
+    const top = pool.slice(0,8), used = {};
+    sc.resp.forEach(r=>{ const t = ITEMS[r.id].vtype; used[t] = (used[t]||0)+1; });
+    const least = Math.min(...top.map(x=>used[x.it.vtype]||0));
+    pool = top.filter(x=>(used[x.it.vtype]||0) === least);
+  } else pool = pool.slice(0,4);
+  return pool.length ? pool[Math.floor(Math.random()*pool.length)].it : null;
+}
+function levelOf(theta){
+  let idx = theta < -2 ? 0 : theta < -1 ? 1 : theta < 0 ? 2 : theta < 1 ? 3 : theta < 2 ? 4 : 5;
+  const lo = [-3, -2, -1, 0, 1, 2][idx];
+  const plus = idx < 5 && theta >= lo + 0.7;
+  return {code: LEVELS[idx], label: LEVELS[idx] + (plus ? '+' : ''), idx};
+}
+function shuffle(a){ a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+/* vocabulary size */
+const BANDS = VOCAB_BANDS.trim().split('\n').map((l,i,arr)=>{
+  const f = l.split('|'); const hi = +f[0];
+  const lo = i ? +arr[i-1].split('|')[0] : 0;
+  return {lo, hi, words: f.slice(1)};
+});
+const FAKES = PSEUDOWORDS.split('|');
+function vocabSize(known){
+  const fakeHits = FAKES.filter(w=>known.has(w)).length;
+  const f = fakeHits / FAKES.length;
+  let size = 0;
+  for (const b of BANDS){
+    const h = b.words.filter(w=>known.has(w)).length / b.words.length;
+    const corr = f >= 1 ? 0 : Math.max(0, (h - f)/(1 - f));
+    size += corr * (b.hi - b.lo);
+  }
+  return {size: Math.round(size/50)*50, falseRate: f, reliable: f <= 0.3};
+}
+function sizeToTheta(n){
+  const pts = [[300,-3.3],[600,-2.5],[1500,-1.5],[2750,-0.5],[4000,0.5],[6000,1.5],[9500,2.5],[16000,3.2]];
+  const x = Math.log(Math.max(n,100));
+  if (x <= Math.log(pts[0][0])) return pts[0][1];
+  for (let i=1;i<pts.length;i++){
+    const x0=Math.log(pts[i-1][0]), x1=Math.log(pts[i][0]);
+    if (x <= x1) return pts[i-1][1] + (pts[i][1]-pts[i-1][1])*(x-x0)/(x1-x0);
+  }
+  return pts[pts.length-1][1];
+}
+
+/* ===================== STATE ===================== */
+let S;
+function reset(){
+  S = {
+    screen:'intro', name:'', self:null,
+    vc:{order: shuffle(BANDS.flatMap(b=>b.words).concat(FAKES)), page:0, known:new Set(), result:null},
+    scales:{G:{key:'G',resp:[],prior:{m:0,s:1.2},theta:0,se:1.2}, V:{key:'V',resp:[],prior:{m:0,s:1.2},theta:0,se:1.2}},
+    used:new Set(), turn:'G', cur:null, sel:null, typed:'', sent:false
+  };
+}
+const VC_PER_PAGE = 14;
+
+/* ===================== VIEWS ===================== */
+const view = document.getElementById('view');
+const stepEl = document.getElementById('step');
+function render(html, step){
+  view.innerHTML = '<section class="screen">' + html + '</section>';
+  stepEl.textContent = step || '';
+  window.scrollTo({top:0});
+}
+
+function vIntro(){
+  render(`
+    <h1>Узнайте свой уровень <em>английского</em></h1>
+    <p class="lead">Тест подстраивается под вас: после каждого ответа следующий вопрос становится проще или сложнее.</p>
+    <div class="meta"><span><b>15–20</b> минут</span><span><b>A1–C2</b></span><span>Грамматика и лексика</span></div>
+    <input class="field" id="name" type="text" placeholder="Ваше имя" autocomplete="name" maxlength="60" value="${esc(S.name)}">
+    <div class="row"><button class="btn" data-act="start">Начать <span class="arr">→</span></button></div>
+  `);
+}
+
+function vSelf(){
+  render(`
+    <h2>Что лучше всего описывает вас?</h2>
+    <p class="lead">Это только отправная точка — дальше тест уточнит уровень сам.</p>
+    <div class="cards">
+      ${SELF.map((s,i)=>`<button class="card${S.self===i?' on':''}" data-act="self" data-i="${i}"><span class="n">${i+1}</span><span>${esc(s[0])}</span></button>`).join('')}
+    </div>
+    <div class="row"><button class="btn" data-act="self-next" ${S.self===null?'disabled':''}>Дальше <span class="arr">→</span></button></div>
+  `, 'Шаг 1 из 3');
+}
+
+function vVocab(){
+  const pages = Math.ceil(S.vc.order.length / VC_PER_PAGE);
+  const words = S.vc.order.slice(S.vc.page*VC_PER_PAGE, (S.vc.page+1)*VC_PER_PAGE);
+  render(`
+    <h2>Какие слова вы знаете?</h2>
+    <p class="lead">Отметьте слова, значение которых вы точно знаете. Некоторые слова выдуманы — их отмечать не нужно.</p>
+    <div class="chips">
+      ${words.map(w=>`<button class="chip${S.vc.known.has(w)?' on':''}" data-act="word" data-w="${esc(w)}" aria-pressed="${S.vc.known.has(w)}">${esc(w)}</button>`).join('')}
+    </div>
+    <p class="hint">${S.vc.page+1} / ${pages}</p>
+    <div class="row"><button class="btn" data-act="vocab-next">${S.vc.page+1<pages?'Дальше':'Перейти к тесту'} <span class="arr">→</span></button></div>
+  `, 'Шаг 2 из 3');
+}
+
+function progress(){
+  const mx = k => CONFIG.limits[k].max;
+  const part = k => scaleDone(S.scales[k]) ? mx(k) : S.scales[k].resp.length;
+  return Math.round((part('G') + part('V')) / (mx('G') + mx('V')) * 100);
+}
+
+function vQuestion(){
+  const it = S.cur.it;
+  const tag = it.scale === 'G' ? 'Грамматика' : 'Лексика';
+  let prompt = it.prompt, kw = '';
+  const m = prompt.match(/\(([A-Z]+)\)\s*$/);
+  if (it.type === 'VT' && m){ kw = m[1]; prompt = prompt.replace(m[0], '').trim(); }
+  const fill = it.type === 'VT' ? S.typed : (S.sel !== null ? S.cur.opts[S.sel] : '');
+  const gapHtml = `<span class="gap${fill?' filled':''}">${fill ? esc(fill) : '&nbsp;'}</span>`;
+  const q = esc(prompt).replace('___', gapHtml);
+  let body;
+  if (it.type === 'VT'){
+    body = `<input class="field typed" id="typed" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Впишите слово" value="${esc(S.typed)}">
+            <p class="hint" style="margin-top:10px">Образуйте нужную форму от слова <b>${esc(kw)}</b>.</p>`;
+  } else {
+    const long = S.cur.opts.some(o=>o.length > 26);
+    body = `<div class="opts${long?' one':''}">${S.cur.opts.map((o,i)=>`<button class="opt${S.sel===i?' on':''}" data-act="opt" data-i="${i}"><span class="k">${i+1}</span><span>${o==='—'?'— <span class="hint">(без артикля)</span>':esc(o)}</span></button>`).join('')}</div>`;
+  }
+  const ready = it.type === 'VT' ? S.typed.trim().length > 0 : S.sel !== null;
+  render(`
+    <div class="bar"><i style="width:${progress()}%"></i></div>
+    <span class="tag">${tag}</span>
+    <p class="q">${q}</p>
+    ${body}
+    <div class="actions">
+      <button class="link" data-act="dk">Не знаю</button>
+      <button class="btn" data-act="answer" id="answerBtn" ${ready?'':'disabled'}>Дальше <span class="arr">→</span></button>
+    </div>
+  `, 'Шаг 3 из 3');
+  const inp = document.getElementById('typed');
+  if (inp){ inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+}
+
+function selectOpt(i){
+  S.sel = i;
+  view.querySelectorAll('.opt').forEach((o,k)=>o.classList.toggle('on', k===i));
+  const gap = view.querySelector('.gap'); if (gap){ gap.textContent = S.cur.opts[i] === '—' ? '—' : S.cur.opts[i]; gap.classList.add('filled'); }
+  const btn = document.getElementById('answerBtn'); if (btn) btn.disabled = false;
+}
+
+function computeResult(){
+  const G = S.scales.G, V = S.scales.V;
+  const theta = (G.theta + V.theta)/2;
+  const se = Math.sqrt(G.se*G.se + V.se*V.se)/2;
+  const wrong = [];
+  for (const k of ['G','V']) for (const r of S.scales[k].resp) if (!r.ok) wrong.push(r);
+  const topics = {};
+  wrong.forEach(r=>{ const it = ITEMS[r.id]; const key = it.topic; if (!topics[key] || it.b < topics[key].b) topics[key] = {topic: key, level: it.level, b: it.b, scale: it.scale}; });
+  return {
+    overall: levelOf(theta), theta, se,
+    g: levelOf(G.theta), gTheta: G.theta, gSe: G.se, gRange: [levelOf(G.theta - G.se).label, levelOf(G.theta + G.se).label],
+    v: levelOf(V.theta), vTheta: V.theta, vSe: V.se, vRange: [levelOf(V.theta - V.se).label, levelOf(V.theta + V.se).label],
+    size: S.vc.result,
+    topics: Object.values(topics).filter(t=>t.b <= theta + 0.6).sort((a,b)=>a.b-b.b).slice(0,10),
+    answered: G.resp.length + V.resp.length,
+    correct: G.resp.filter(r=>r.ok).length + V.resp.filter(r=>r.ok).length
+  };
+}
+function pos(theta){ return Math.max(2, Math.min(98, (theta + 3) / 6 * 100)); }
+
+function vResults(){
+  const R = computeResult();
+  S.result = R;
+  const all = [...S.scales.G.resp, ...S.scales.V.resp];
+  const reviewItems = all.map(r=>{
+    const it = ITEMS[r.id];
+    const right = it.type === 'VT' ? it.answers[0] : it.correct;
+    const shown = esc(it.prompt).replace('___', '<span class="gap filled">'+esc(right)+'</span>');
+    const yours = r.dk ? 'не знаю' : r.given;
+    return `<div class="rev"><div class="l">${it.scale==='G'?'Грамматика':'Лексика'} · ${it.level} · ${esc(it.topic)}</div>
+      <div class="p">${shown}</div>
+      <div class="a">${r.ok ? '<b>Верно</b>' : 'Ваш ответ: <s>'+esc(yours)+'</s> · правильно: <b>'+esc(right)+'</b>'}</div></div>`;
+  }).join('');
+  const sizeBlock = R.size ? `<div class="stat"><div class="over">Словарный запас</div><div class="v">${R.size.size < 500 ? '< 500' : '≈ ' + R.size.size.toLocaleString('ru-RU')}</div><div class="s">${R.size.reliable ? 'слов (оценка по частотности)' : 'много отмеченных выдуманных слов — оценка неточна'}</div></div>` : '';
+  render(`
+    <div class="over">Ваш уровень${S.name?' · '+esc(S.name):''}</div>
+    <div class="lvl">${R.overall.label}</div>
+    <p class="desc">${LEVEL_DESC[R.overall.code]}</p>
+
+    <div class="scale" aria-hidden="true">
+      <div class="track">${LEVELS.map(l=>`<span>${l}</span>`).join('')}</div>
+      <div class="pin g" style="left:${pos(R.gTheta)}%"></div>
+      <div class="pin v" style="left:${pos(R.vTheta)}%${Math.abs(pos(R.gTheta)-pos(R.vTheta))<2?';top:-18px':''}"></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--ink)"></i>Грамматика</span><span><i style="background:var(--accent)"></i>Лексика</span></div>
+
+    <div class="${sizeBlock?'grid3':'grid2'}">
+      <div class="stat"><div class="over">Грамматика</div><div class="v">${R.g.label}</div><div class="s">диапазон ${R.gRange[0]===R.gRange[1]?R.gRange[0]:R.gRange[0]+' – '+R.gRange[1]}</div></div>
+      <div class="stat"><div class="over">Лексика</div><div class="v">${R.v.label}</div><div class="s">диапазон ${R.vRange[0]===R.vRange[1]?R.vRange[0]:R.vRange[0]+' – '+R.vRange[1]}</div></div>
+      ${sizeBlock}
+    </div>
+
+    ${R.topics.length ? `<div class="sect"><h3>Что стоит повторить</h3><div class="topics">${R.topics.map(t=>`<span class="topic"><b>${t.level}</b>${esc(t.topic)}</span>`).join('')}</div></div>` : ''}
+
+    <div class="sect">
+      <details><summary>Разбор ответов · ${R.correct} из ${R.answered}</summary>${reviewItems}</details>
+    </div>
+
+    <div class="row" style="margin-top:36px">
+      <button class="btn" data-act="copy">Скопировать результат</button>
+      <button class="btn ghost" data-act="restart">Пройти заново</button>
+    </div>
+    <p class="sent" id="sent"></p>
+    <p class="note">Тест оценивает грамматику и лексику. Аудирование, чтение, письмо и говорение он не проверяет.</p>
+  `, 'Результат');
+  sendToBilly(R);
+}
+
+/* ===================== FLOW ===================== */
+function startTest(){
+  const selfTheta = SELF[S.self][1];
+  const r = vocabSize(S.vc.known);
+  S.vc.result = r;
+  S.scales.G.prior = {m: selfTheta, s: 1.5};
+  S.scales.V.prior = r.reliable ? {m: (selfTheta + sizeToTheta(r.size))/2, s: 1.4} : {m: selfTheta, s: 1.5};
+  estimate(S.scales.G); estimate(S.scales.V);
+  S.screen = 'test';
+  next();
+}
+function next(){
+  const gDone = scaleDone(S.scales.G), vDone = scaleDone(S.scales.V);
+  if (gDone && vDone){ S.screen = 'results'; vResults(); return; }
+  let key = S.turn;
+  if (scaleDone(S.scales[key])) key = key === 'G' ? 'V' : 'G';
+  const it = pickItem(key);
+  if (!it){ S.scales[key].exhausted = true; return next(); }
+  S.turn = key === 'G' ? 'V' : 'G';
+  S.used.add(it.id);
+  S.cur = {it, opts: it.type === 'VT' ? null : shuffle([it.correct, ...it.distractors])};
+  S.sel = null; S.typed = '';
+  vQuestion();
+}
+function submit(dk){
+  const it = S.cur.it, sc = S.scales[it.scale];
+  let ok = false, given = '';
+  if (!dk){
+    if (it.type === 'VT'){ given = S.typed.trim(); ok = it.answers.includes(norm(given)); }
+    else { given = S.cur.opts[S.sel]; ok = given === it.correct; }
+  }
+  sc.resp.push({id: it.id, ok, dk: !!dk, given});
+  estimate(sc);
+  next();
+}
+
+function summaryText(R){
+  const lines = [
+    'NOEON · Level Test',
+    S.name ? 'Имя: ' + S.name : null,
+    'Общий уровень: ' + R.overall.label,
+    'Грамматика: ' + R.g.label + ' (θ ' + R.gTheta.toFixed(2) + ' ± ' + R.gSe.toFixed(2) + ')',
+    'Лексика: ' + R.v.label + ' (θ ' + R.vTheta.toFixed(2) + ' ± ' + R.vSe.toFixed(2) + ')',
+    R.size ? 'Словарный запас: ' + (R.size.size < 500 ? '< 500' : '≈ ' + R.size.size) + (R.size.reliable ? '' : ' (ненадёжно: ' + Math.round(R.size.falseRate*100) + '% выдуманных слов)') : null,
+    'Верных ответов: ' + R.correct + ' из ' + R.answered,
+    R.topics.length ? 'Повторить: ' + R.topics.map(t=>t.level + ' ' + t.topic).join('; ') : null
+  ];
+  return lines.filter(Boolean).join('\n');
+}
+function sendToBilly(R){
+  if (S.sent || !CONFIG.telegramToken || !CONFIG.telegramChatId) return;
+  S.sent = true;
+  const body = new URLSearchParams({chat_id: CONFIG.telegramChatId, text: summaryText(R)});
+  fetch('https://api.telegram.org/bot' + CONFIG.telegramToken + '/sendMessage', {method:'POST', mode:'no-cors', body})
+    .then(()=>{ const el = document.getElementById('sent'); if (el) el.textContent = 'Результат отправлен преподавателю.'; })
+    .catch(()=>{});
+}
+function copyText(text, btn){
+  const done = () => { btn.textContent = 'Скопировано'; setTimeout(()=>{ btn.textContent = 'Скопировать результат'; }, 1800); };
+  if (navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(done).catch(fallback); }
+  else fallback();
+  function fallback(){
+    const ta = document.createElement('textarea'); ta.value = text; ta.className = 'visually-hidden';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e){}
+    ta.remove();
+  }
+}
+
+/* ===================== EVENTS (delegation) ===================== */
+view.addEventListener('click', e=>{
+  const t = e.target.closest('[data-act]'); if (!t || t.disabled) return;
+  const act = t.dataset.act;
+  if (act === 'start'){ const n = document.getElementById('name'); S.name = n ? n.value.trim() : ''; S.screen = 'self'; vSelf(); }
+  else if (act === 'self'){ S.self = +t.dataset.i; view.querySelectorAll('.card').forEach((c,i)=>c.classList.toggle('on', i===S.self)); view.querySelector('[data-act="self-next"]').disabled = false; }
+  else if (act === 'self-next'){ S.screen = 'vocab'; vVocab(); }
+  else if (act === 'word'){ const w = t.dataset.w; S.vc.known.has(w) ? S.vc.known.delete(w) : S.vc.known.add(w); t.classList.toggle('on'); t.setAttribute('aria-pressed', S.vc.known.has(w)); }
+  else if (act === 'vocab-next'){
+    const pages = Math.ceil(S.vc.order.length / VC_PER_PAGE);
+    if (S.vc.page + 1 < pages){ S.vc.page++; vVocab(); } else startTest();
+  }
+  else if (act === 'opt') selectOpt(+t.dataset.i);
+  else if (act === 'answer') submit(false);
+  else if (act === 'dk') submit(true);
+  else if (act === 'copy') copyText(summaryText(S.result), t);
+  else if (act === 'restart'){ const n = S.name; reset(); S.name = n; vIntro(); }
+});
+view.addEventListener('input', e=>{
+  if (e.target.id === 'typed'){
+    S.typed = e.target.value;
+    const gap = view.querySelector('.gap');
+    if (gap){ gap.textContent = S.typed || ' '; gap.classList.toggle('filled', !!S.typed); }
+    const btn = document.getElementById('answerBtn'); if (btn) btn.disabled = !S.typed.trim();
+  } else if (e.target.id === 'name'){ S.name = e.target.value; }
+});
+document.addEventListener('keydown', e=>{
+  if (S.screen === 'test' && S.cur){
+    if (S.cur.it.type !== 'VT' && /^[1-4]$/.test(e.key)) selectOpt(+e.key - 1);
+    else if (e.key === 'Enter'){ const b = document.getElementById('answerBtn'); if (b && !b.disabled){ e.preventDefault(); submit(false); } }
+  } else if (e.key === 'Enter'){
+    const b = view.querySelector('.btn:not([disabled])'); if (b && S.screen !== 'results'){ e.preventDefault(); b.click(); }
+  }
+});
+
+reset(); vIntro();
+window.__LT = {get S(){return S}, ITEMS, estimate, levelOf, vocabSize, sizeToTheta, CONFIG};
+</script>
+</body>
+</html>
